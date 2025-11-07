@@ -12,8 +12,16 @@ var connectionString = "Host = localhost; Database=Crud;Username=postgres;Passwo
 
 builder.Services.AddDbContext<AppDbContext>(Opt => Opt.UseNpgsql(connectionString));
 
+
 builder.Services.AddScoped<ITodoRepository, ToDoRepository>();
+builder.Services.AddScoped<IUserRepository, UserRepository>();
+
+
+
 builder.Services.AddScoped<TodoService>();
+builder.Services.AddScoped<UserService>();
+
+
 
 builder.Services.AddControllers();
 builder.Services.AddEndpointsApiExplorer();

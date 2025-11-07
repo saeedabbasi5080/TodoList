@@ -10,16 +10,16 @@ namespace Api
     {
         private readonly TodoService _service;
 
-        public TodoController(TodoService todoService) => _service = todoService;
-        //{
-        //    _service = todoService;
-        //}
+        public TodoController(TodoService todoService) //=> _service = todoService;
+        {
+            _service = todoService;
+        }
 
         [HttpGet]
-        public async Task<ActionResult<List<TodoDto>>> Get() => Ok(await _service.GetAllAsync());
-        //{
-        //    return Ok(await _service.GetAllAsync());
-        //}
+        public async Task<ActionResult<List<TodoDto>>> Get() //=> Ok(await _service.GetAllAsync());
+        {
+            return Ok(await _service.GetAllAsync());
+        }
 
         [HttpGet("id")]
         public async Task<ActionResult<TodoDto?>> GetById(int id)

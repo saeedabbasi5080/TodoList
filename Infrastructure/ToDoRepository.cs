@@ -27,7 +27,7 @@ namespace Infrastructure
                 _context.ToDos.Remove(item);
                 await _context.SaveChangesAsync();
             }
-                           
+
         }
 
         public async Task<IEnumerable<TodoItem>> GetAllAsync1() => await _context.ToDos.ToListAsync();
