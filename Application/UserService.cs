@@ -21,7 +21,13 @@ namespace Application
                 UserName = u.UserName,
                 Email = u.Email,
                 Name = u.Name,
-                LastName = u.LastName
+                LastName = u.LastName,
+                todoDtos = u.ToDos.Select(u => new TodoDto
+                {
+                    Id = u.Id,
+                    Title = u.Title,
+                    IsCompleted = u.IsCompleted
+                }).ToList()
             }
             ).ToList();
         }
@@ -40,8 +46,14 @@ namespace Application
                 UserName = user.UserName,
                 Email = user.Email,
                 Name = user.Name,
-                LastName = user.LastName
-            };            
+                LastName = user.LastName,
+                todoDtos = user.ToDos.Select(u => new TodoDto
+                {
+                    Id = u.Id,
+                    Title = u.Title,
+                    IsCompleted = u.IsCompleted
+                }).ToList(),
+            };
         }
 
         public async Task<UserDto> CreateAsync(UserDto user)

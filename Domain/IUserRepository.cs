@@ -8,7 +8,7 @@ namespace Domain
 {
     public interface IUserRepository
     {
-        Task<IEnumerable<User>> GetAllAsync();
+        Task<List<User>> GetAllAsync();
         Task <User?> GetById(int id);
         Task AddAsync(User user);
         Task UpdateAsync(User user);

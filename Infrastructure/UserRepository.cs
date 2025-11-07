@@ -31,15 +31,15 @@ namespace Infrastructure
             
         }
 
-        public async Task<IEnumerable<User>> GetAllAsync()
+        public async Task<List<User>> GetAllAsync()
         {
-            var users = await _context.Users.ToListAsync();
+            var users = await _context.Users.Include(u => u.ToDos).ToListAsync();
             return users;
         }
 
         public async Task<User?> GetById(int id)
         {
-            var user = await _context.Users.FindAsync(id);
+            var user = await _context.Users.Include(u => u.ToDos).FirstOrDefaultAsync(u => u.Id == id);
             return user;
         }
 

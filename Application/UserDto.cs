@@ -10,5 +10,6 @@ namespace Application
         public string LastName { get; set; } = string.Empty;
         public string Email { get; set; } = string.Empty;
 
+        public List<TodoDto> todoDtos { get; set; } = new();
     }
 }

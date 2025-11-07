@@ -16,7 +16,7 @@ namespace Api
 
 
         [HttpGet]
-        public async Task<ActionResult<List<UserDto>>> Get()
+        public async Task<ActionResult<List<UserDto>>> GetAll()
         {
             return Ok(await _userService.GetAllAsync());
         }
