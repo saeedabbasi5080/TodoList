@@ -1,7 +1,9 @@
-﻿using Domain;
+﻿using Application.DTOs.ToDoDTOs;
+using Application.DTOs.UserDTOs;
+using Domain;
 using System.ComponentModel.DataAnnotations;
 
-namespace Application
+namespace Application.Services
 {
     public class UserService
     {
@@ -56,7 +58,7 @@ namespace Application
             };
         }
 
-        public async Task<UserDto> CreateAsync(UserDto user)
+        public async Task<UserDto> CreateAsync(CreateUserDto user)
         {
             var newuser = new User
             {
@@ -66,11 +68,20 @@ namespace Application
                 Email = user.Email
             };
             await _repository.AddAsync(newuser);
-            user.Id = newuser.Id;
-            return user;
+            //user.Id = newuser.Id;
+            //return user;
+
+            return new UserDto
+            {
+                Id = newuser.Id,
+                Name = newuser.Name,
+                LastName = newuser.LastName,
+                UserName = newuser.UserName,
+                Email = newuser.Email
+            };
         }
 
-        public async Task UpdateAsync(int id, UserDto userdto)
+        public async Task UpdateAsync(int id, CreateUserDto userdto)
         {
             var user = await _repository.GetById(id);
 
@@ -84,6 +95,8 @@ namespace Application
             user.LastName = userdto.LastName;
             user.Email = userdto.LastName;
             await _repository.UpdateAsync(user);
+
+  
         }
 
         public async Task DeleteAsync(int id)

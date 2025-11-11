@@ -1,8 +1,9 @@
 ﻿using Microsoft.AspNetCore.Mvc;
-using Application;
 using System.Reflection.Metadata.Ecma335;
+using Application.DTOs.ToDoDTOs;
+using Application.Services;
 
-namespace Api
+namespace Api.Controllers
 {
     [ApiController]
     [Route("api/[controller]")]
@@ -33,18 +34,18 @@ namespace Api
         }
 
         [HttpPost]
-        public async Task<ActionResult<TodoDto>> Post(int userId, [FromBody] TodoDto dto)
+        public async Task<ActionResult<TodoDto>> Post(int userId, [FromBody] CreateToDoDto dto)
         {
             var item = await _service.CreateAsync(dto, userId);
             return CreatedAtAction(nameof(GetById), new { id = item.Id }, item);
         }
 
         [HttpPut("id")]
-        public async Task<ActionResult> Put(int userId ,int id, [FromBody] TodoDto dto)
+        public async Task<ActionResult> Put(int userId ,int id, [FromBody] CreateToDoDto dto)
         {
-            if (id != dto.Id) return BadRequest();
+            //if (id != dto.Id) return BadRequest();
             await _service.UpdateAsync(id, dto, userId);
-            return NoContent();
+            return Ok(dto);
         }
 
         [HttpDelete("id")]

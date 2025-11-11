@@ -1,6 +1,6 @@
 ﻿using Microsoft.EntityFrameworkCore;
-using Domain;
 using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
+using Domain.Entities;
 
 namespace Infrastructure
 

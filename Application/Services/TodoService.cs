@@ -1,6 +1,7 @@
-﻿using Domain;
+﻿using Application.DTOs.ToDoDTOs;
+using Domain;
 
-namespace Application
+namespace Application.Services
 {
     public class TodoService
     {
@@ -33,15 +34,20 @@ namespace Application
             };
         }
 
-        public async Task<TodoDto> CreateAsync(TodoDto dto, int userId)
+        public async Task<TodoDto> CreateAsync(CreateToDoDto dto, int userId)
         {
-            var item = new TodoItem { Title = dto.Title, UserId = userId };
+            var item = new TodoItem { Title = dto.Title, UserId = userId, IsCompleted = dto.IsCompleted };
             await _repository.AddAsync1(item);
-            dto.Id = item.Id;
-            return dto;
+
+            return new TodoDto
+            {
+                Id = item.Id,
+                Title = item.Title,
+                IsCompleted = item.IsCompleted,
+            };
         }
 
-        public async Task UpdateAsync(int id, TodoDto dto, int userId) 
+        public async Task UpdateAsync(int id, CreateToDoDto dto, int userId) 
         {
             var item = await _repository.GetByIdAsync1(id, userId) ?? throw new Exception("Item not found");
             item.Title = dto.Title;

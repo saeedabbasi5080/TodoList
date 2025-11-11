@@ -1,7 +1,8 @@
-﻿using Application;
+﻿using Application.DTOs.UserDTOs;
+using Application.Services;
 using Microsoft.AspNetCore.Mvc;
 
-namespace Api
+namespace Api.Controllers
 {
     [ApiController]
     [Route("api/[controller]")]
@@ -32,16 +33,16 @@ namespace Api
         }
 
         [HttpPost]
-        public async Task<ActionResult<UserDto>> Post([FromBody] UserDto userDto)
+        public async Task<ActionResult<UserDto>> Post([FromBody] CreateUserDto createUserDto)
         {
-            var user = await _userService.CreateAsync(userDto);
-            return CreatedAtAction(nameof(GetById), new { id = user.Id }, user );
+            var createdUser = await _userService.CreateAsync(createUserDto);
+            return CreatedAtAction(nameof(GetById), new { id = createdUser.Id }, createdUser);
         }
 
         [HttpPut("id")]
-        public async Task<ActionResult> Put(int id, [FromBody] UserDto userDto)
+        public async Task<ActionResult> Put(int id, [FromBody] CreateUserDto userDto)
         {
-            if (id != userDto.Id) return BadRequest();
+            //if (id != userDto.Id) return BadRequest();
             await _userService.UpdateAsync(id, userDto);
             return Ok(userDto);
         }

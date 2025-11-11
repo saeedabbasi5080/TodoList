@@ -1,6 +1,6 @@
 ﻿
-
-using Domain;
+using Application;
+using Domain.Entities;
 using Microsoft.EntityFrameworkCore;
 
 namespace Infrastructure
