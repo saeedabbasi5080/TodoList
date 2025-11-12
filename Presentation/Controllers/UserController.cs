@@ -1,9 +1,11 @@
 ﻿using Application.DTOs.UserDTOs;
 using Application.Services;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 
 namespace Api.Controllers
 {
+    [Authorize]
     [ApiController]
     [Route("api/[controller]")]
     public class UserController : ControllerBase
@@ -15,6 +17,7 @@ namespace Api.Controllers
         //    _userService = userService;
         //}
 
+        [Authorize]
 
         [HttpGet]
         public async Task<ActionResult<List<UserDto>>> GetAll()
@@ -31,6 +34,7 @@ namespace Api.Controllers
 
             return Ok(user);
         }
+        [Authorize]
 
         [HttpPost]
         public async Task<ActionResult<UserDto>> Post([FromBody] CreateUserDto createUserDto)
@@ -38,6 +42,7 @@ namespace Api.Controllers
             var createdUser = await _userService.CreateAsync(createUserDto);
             return CreatedAtAction(nameof(GetById), new { id = createdUser.Id }, createdUser);
         }
+        [Authorize]
 
         [HttpPut("id")]
         public async Task<ActionResult> Put(int id, [FromBody] CreateUserDto userDto)
@@ -46,6 +51,7 @@ namespace Api.Controllers
             await _userService.UpdateAsync(id, userDto);
             return Ok(userDto);
         }
+        [Authorize]
 
         [HttpDelete("id")]
         public async Task<ActionResult> Delete(int id)

@@ -1,6 +1,6 @@
 ﻿using Application.DTOs.ToDoDTOs;
 using Application.DTOs.UserDTOs;
-using Domain;
+using Domain.Entities;
 using System.ComponentModel.DataAnnotations;
 
 namespace Application.Services

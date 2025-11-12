@@ -1,5 +1,5 @@
 ﻿using Application.DTOs.ToDoDTOs;
-using Domain;
+using Domain.Entities;
 
 namespace Application.Services
 {

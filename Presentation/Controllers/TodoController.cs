@@ -1,10 +1,12 @@
-﻿using Microsoft.AspNetCore.Mvc;
-using System.Reflection.Metadata.Ecma335;
-using Application.DTOs.ToDoDTOs;
+﻿using Application.DTOs.ToDoDTOs;
 using Application.Services;
+using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Mvc;
+using System.Reflection.Metadata.Ecma335;
 
 namespace Api.Controllers
 {
+    [Authorize]
     [ApiController]
     [Route("api/[controller]")]
     public class TodoController : ControllerBase
